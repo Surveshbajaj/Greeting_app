@@ -3,6 +3,7 @@ package com.greeting_app.greeting_app.controller;
 import com.greeting_app.greeting_app.DTO.GreetingDTO;
 import com.greeting_app.greeting_app.DTO.GreetingRequest;
 import com.greeting_app.greeting_app.Services.GreetingService;
+import com.greeting_app.greeting_app.entity.GreetingEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +22,14 @@ public class GreetingAppController {
         return new GreetingDTO(greetingService.getGreeting());
     }
 
-    @PostMapping
-    public GreetingDTO greeting2(@RequestBody GreetingRequest greetingRequest) {
-        return new GreetingDTO("Hello "+ greetingRequest.getFirstName() + " " + greetingRequest.getLastName());
+//    @PostMapping
+//    public GreetingDTO greeting2(@RequestBody GreetingRequest greetingRequest) {
+//        return new GreetingDTO("Hello "+ greetingRequest.getFirstName() + " " + greetingRequest.getLastName());
+//    }
+    //UC-03
+    @PostMapping("/add")
+    public GreetingEntity greeting5(@RequestBody GreetingDTO greetingDTO){
+        return greetingService.saveGreeting(greetingDTO.getMessage());
     }
 
     @PutMapping
