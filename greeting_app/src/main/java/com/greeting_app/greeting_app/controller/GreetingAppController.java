@@ -7,6 +7,8 @@ import com.greeting_app.greeting_app.entity.GreetingEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/greeting")
 public class GreetingAppController {
@@ -17,12 +19,17 @@ public class GreetingAppController {
     public GreetingAppController(GreetingService greetingService) {
         this.greetingService = greetingService;
     }
-
+    //UC-05
     @GetMapping("/{id}")
     public String greeting(@PathVariable long id){
         return (greetingService.getMessageById(id)).getMessage();
     }
 
+    //UC-06
+    @GetMapping("/all")
+    public List<GreetingEntity> getAllMessages() {
+        return greetingService.getAllMessage();
+    }
     @PostMapping
     public GreetingDTO greeting2(@RequestBody GreetingRequest greetingRequest) {
         return new GreetingDTO("Hello "+ greetingRequest.getFirstName() + " " + greetingRequest.getLastName());
