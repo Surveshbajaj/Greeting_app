@@ -35,7 +35,17 @@ import java.util.Optional;
         }
         return null;
     }
-        public String getGreeting() {
+    //Method to delete greeting messages by id
+    public boolean deleteGreeting(Long id) {
+        if (greetingRepository.existsById(id)) {
+            greetingRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+
+    public String getGreeting() {
             return "Hello World";
         }
     }

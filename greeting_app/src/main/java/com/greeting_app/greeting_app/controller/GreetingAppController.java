@@ -59,6 +59,14 @@ public class GreetingAppController {
         return new GreetingDTO("Hello, this is a DELETE request!");
     }
 
+    //UC-08
+    @DeleteMapping("/delete/{id}")
+    public Boolean greetDelete(@PathVariable long id) {
+        return greetingService.deleteGreeting(id);
+
+    }
+
+
 
 
 }
