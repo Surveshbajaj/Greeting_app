@@ -13,20 +13,21 @@ public class GreetingAppController {
     @Autowired
     private final GreetingService greetingService;
 
+
     public GreetingAppController(GreetingService greetingService) {
         this.greetingService = greetingService;
     }
 
-    @GetMapping
-    public GreetingDTO greeting() {
-        return new GreetingDTO(greetingService.getGreeting());
+    @GetMapping("/{id}")
+    public String greeting(@PathVariable long id){
+        return (greetingService.getMessageById(id)).getMessage();
     }
 
-//    @PostMapping
-//    public GreetingDTO greeting2(@RequestBody GreetingRequest greetingRequest) {
-//        return new GreetingDTO("Hello "+ greetingRequest.getFirstName() + " " + greetingRequest.getLastName());
-//    }
-    //UC-03
+    @PostMapping
+    public GreetingDTO greeting2(@RequestBody GreetingRequest greetingRequest) {
+        return new GreetingDTO("Hello "+ greetingRequest.getFirstName() + " " + greetingRequest.getLastName());
+    }
+    //UC-04
     @PostMapping("/add")
     public GreetingEntity greeting5(@RequestBody GreetingDTO greetingDTO){
         return greetingService.saveGreeting(greetingDTO.getMessage());

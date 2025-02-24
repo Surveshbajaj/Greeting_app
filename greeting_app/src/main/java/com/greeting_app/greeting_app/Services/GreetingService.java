@@ -11,10 +11,13 @@ import org.springframework.stereotype.Service;
         @Autowired
         private GreetingRepository greetingRepository;
 
-        //Method to create and save a greetinng message
+        //Method to create and save a greeting message
         public GreetingEntity saveGreeting(String message) {
             GreetingEntity greeting = new GreetingEntity(message);
             return greetingRepository.save(greeting);
+        }
+        public GreetingEntity getMessageById(long id) {
+            return greetingRepository.findById(id).orElse(null);
         }
         public String getGreeting() {
             return "Hello World";
