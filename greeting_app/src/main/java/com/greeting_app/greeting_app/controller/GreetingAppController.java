@@ -5,9 +5,11 @@ import com.greeting_app.greeting_app.DTO.GreetingRequest;
 import com.greeting_app.greeting_app.Services.GreetingService;
 import com.greeting_app.greeting_app.entity.GreetingEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/greeting")
@@ -38,6 +40,13 @@ public class GreetingAppController {
     @PostMapping("/add")
     public GreetingEntity greeting5(@RequestBody GreetingDTO greetingDTO){
         return greetingService.saveGreeting(greetingDTO.getMessage());
+    }
+
+    //UC-07
+    //PUT API to update a greeting message
+    @PutMapping("/edit/{id}")
+    public GreetingEntity editGreeting(@PathVariable Long id, @RequestParam String newMessage) {
+        return greetingService.updateGreeting(id, newMessage);
     }
 
     @PutMapping
